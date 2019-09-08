@@ -1,6 +1,6 @@
 class Api::V1::PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy, :win_round]
-  skip_before_action :verify_authenticity_token, only: :win_round
+  skip_before_action :verify_authenticity_token, only: [:create_round_players, :win_round]
 
   # GET /players
   # GET /players.json
@@ -14,6 +14,19 @@ class Api::V1::PlayersController < ApplicationController
   def show
   end
 
+  def create_round_players
+    player_1 = params[:name_p1]
+    player_2 = params[:name_p2]
+    if player_1.present?
+      @player_one = Player.create(name: player_1)
+    end
+    if player_2.present?
+      @player_two = Player.create(name: player_2)
+    end
+
+    render json: {data: { player1: @player_one, player2: @player_two }}
+  end
+
   def win_round
     @player.increment(:wins, 1)
     if @player.save
@@ -21,6 +34,7 @@ class Api::V1::PlayersController < ApplicationController
     end
     render json: @player
   end
+
 
   # GET /players/1/edit
   def edit

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :players do
         collection do
           put :win_round
+          post :create_round_players
         end
       end
     end
