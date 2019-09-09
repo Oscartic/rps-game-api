@@ -5,5 +5,6 @@
 
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-moves = Move.create([{move: 'paper', kills: 'rock'}, {move: 'rock', kills: 'scissors'}, {move: 'scissors', kills: 'paper'}])
+Move.destroy_all
+#ActiveRecord::Base.connection.execute("ALTER SEQUENCE MOVES_id_seq RESTART WITH 1")
+move = Move.create([{move: 'paper', kills: 'rock'}, {move: 'rock', kills: 'scissors'}, {move: 'scissors', kills: 'paper'}])
