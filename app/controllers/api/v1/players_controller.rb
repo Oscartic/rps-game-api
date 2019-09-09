@@ -24,7 +24,7 @@ class Api::V1::PlayersController < ApplicationController
       @player_two = Player.create(name: player_2)
     end
 
-    render json: {data: { player1: @player_one, player2: @player_two }}
+    render json: {data: [ @player_one, @player_two] }
   end
 
   def win_round
