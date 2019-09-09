@@ -4,8 +4,8 @@ Rails.application.routes.draw do
       resources :moves
       resources :players do
         collection do
-          put :win_round
-          post :create_round_players
+          post :create_round_players, via: :options
+          put :win_round, via: :options
         end
       end
     end
